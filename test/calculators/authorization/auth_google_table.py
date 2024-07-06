@@ -1,5 +1,4 @@
 import os
-import requests
 from google.oauth2.credentials import Credentials
 from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -27,17 +26,3 @@ def get_access_token():
         with open(TOKEN_PATH, 'w') as token:
             token.write(creds.to_json())
     return creds.token
-
-
-def read_sheet(spreadsheet_id, range_name):
-    access_token = get_access_token()
-    headers = {
-        'Authorization': f'Bearer {access_token}',
-        'Accept': 'application/json',
-    }
-    response = requests.get(f'https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{range_name}',
-                            headers=headers)
-    if response.status_code == 200:
-        return response.json()['values']
-    else:
-        response.raise_for_status()
