@@ -156,6 +156,7 @@ cython_debug/
 
 #auth inform
 src/client_secret.json
+src/payload_secret.py
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
